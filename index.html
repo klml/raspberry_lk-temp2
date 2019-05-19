@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=0"/>
+    <title>Temperature from Raspberry</title>
+</head>
+<body>
+    <div id="grapharea"></div>
+    <a href="#temperatur.csv">temperatur.csv</a>
+
+    <script src="//cdn.jsdelivr.net/dygraphs/1.0.1/dygraph-combined.js"></script>
+    <script>
+(this.hashrouter = function () {
+    var hashStr = window.location.hash, hashPseudoGets, keyVal
+    hashStr = hashStr.substring(1, hashStr.length);
+    new Dygraph(grapharea, hashStr, {
+      legend: 'always',
+      title: 'temp',
+      rollPeriod: 5,
+      customBars: false,
+      ylabel: 'temperature (c)',
+    });
+})();
+window.onhashchange = this.hashrouter;
+    </script>
+</body>
+</html>
