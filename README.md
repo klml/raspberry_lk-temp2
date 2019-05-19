@@ -4,6 +4,7 @@ Use [linkerkit.de LK-Temp2](http://www.linkerkit.de/index.php?title=LK-Temp2) on
 
 Based on [Codebeispiel Raspberry](http://www.linkerkit.de/index.php?title=LK-Temp2#Codebeispiel_Raspberry)
 
+[Demo](https://klml.github.io/raspberry_lk-temp2/#example/temperatur.csv)
 
 ## similar
 
