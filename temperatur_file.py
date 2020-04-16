@@ -8,11 +8,20 @@ import threading
 from time import sleep
 from datetime import datetime
 import RPi.GPIO as GPIO
+import json
+import os.path
+import urllib2
 
+config = {}
 logfile = "/var/www/html/temperatur.csv"
 mete_delay = 10
 round_digits = 1
 verbose = False
+
+
+config_json = os.path.join( os.path.dirname(__file__) , 'config.json')
+if os.path.isfile( config_json ):
+    config = json.load(open( config_json )) 
 
 
 global past_temperature
@@ -58,7 +67,18 @@ def TemperaturAuswertung():
 
 
 def write_log_file( current_temperature ):
-    date_temperatur = [0,0]
+
+    if 'openweathermap_url' in config:
+        date_temperatur = [0,0,0]
+        try:
+            openweathermap = json.load(urllib2.urlopen( config['openweathermap_url'] ))
+            date_temperatur[2] = openweathermap['main']['temp']
+        except:
+            if verbose:
+                print("got no openweathermap data") 
+    else:
+        date_temperatur = [0,0]
+
     date_temperatur[0] = datetime.now().replace(microsecond=0).isoformat()
     date_temperatur[1] = current_temperature
 
